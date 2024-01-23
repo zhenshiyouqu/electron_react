@@ -14,7 +14,19 @@ let mainWindow
 
 function createWindow() {
     //创建浏览器窗口,宽高自定义
-    mainWindow = new BrowserWindow({width: 800, height: 600})
+    mainWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        frame: false,
+        // transparent: true,
+        alwaysOnTop: true,
+        webPreferences: {
+            nodeIntegration: true, // 是否集成 Nodejs
+            enableRemoteModule: true, // 是否启用remote模块
+            contextIsolation: false, // 是否启用渲染进程沙盒
+        }
+    })
+    // mainWindow.setIgnoreMouseEvents(true)
     if (mode === 'dev') {
         // 加载应用----适用于 react 项目
         mainWindow.loadURL('http://localhost:3000/');
@@ -26,8 +38,6 @@ function createWindow() {
             slashes: true
         }))
     }
-
-
     // 打开开发者工具，默认不打开
     // mainWindow.webContents.openDevTools()
     // 关闭window时触发下列事件.
