@@ -5,9 +5,13 @@
   "homepage": "./",
   "main": "main.js",
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^5.13.2",
+    "electron": "^28.1.4",
+    "electron-packager": "^17.1.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.1",
@@ -20,6 +24,7 @@
     "eject": "react-scripts eject",
     "electron-start": "electron . dev",
     "electron": "electron .",
+    "dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && npm run electron-start\"",
     "package": "electron-packager . react2electron --win=x32 --out ./hello --electron-version=18.1.0"
   },
   "eslintConfig": {
@@ -39,9 +44,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "electron": "^18.1.0",
-    "electron-packager": "^15.5.1"
   }
 }

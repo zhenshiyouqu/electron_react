@@ -17,7 +17,8 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        frame: false,
+        //无边框
+        // frame: false,
         // transparent: true,
         alwaysOnTop: true,
         webPreferences: {

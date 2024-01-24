@@ -1,8 +1,8 @@
-import WordBoard from "./WordBoard/WordBoard";
+import Main from "./WordBoard/main";
 
 function App() {
   return (
-    <WordBoard/>
+    <Main/>
   );
 }
 
