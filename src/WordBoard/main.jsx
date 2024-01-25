@@ -4,8 +4,10 @@ import output from "../source/output.json";
 import save from "../source/save.json";
 import {Button} from "antd";
 
-
-
+const remote = window.remote;
+const electron = window.electron;
+const Store = window.Store;
+const store =new Store({"name":"test"});
 const Main = props => {
     const todayWords=[];
     const timeId = useRef(0);
@@ -42,6 +44,11 @@ const Main = props => {
                 {
                     save.learnedNum === 0 ?<Button type="primary">开始学习</Button> : <Button type="primary">继续学习</Button>
                 }
+                <Button type="primary" onClick={()=>{
+                    console.log(remote);
+                    console.log(electron);
+                    store.set("test","test");
+                }}>Test</Button>
             </div>
         </>
     );

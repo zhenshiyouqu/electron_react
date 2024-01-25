@@ -1,8 +1,14 @@
 // 引入electron并创建一个Browserwindow
 const {app, BrowserWindow} = require('electron')
-const path = require('path')
+const path = require('node:path')
 const url = require('url')
+//持久化
+const Store = require('electron-store');
+const store = new Store();
 
+//开启远程模块
+const remote = require("@electron/remote/main")
+remote.initialize()
 
 // 获取在 package.json 中的命令脚本传入的参数，来判断是开发还是生产环境
 const mode = process.argv[2];
@@ -13,6 +19,7 @@ let mainWindow
 
 
 function createWindow() {
+    console.log(path.join(__dirname, 'preload.js'))
     //创建浏览器窗口,宽高自定义
     mainWindow = new BrowserWindow({
         width: 800,
@@ -20,13 +27,20 @@ function createWindow() {
         //无边框
         // frame: false,
         // transparent: true,
-        alwaysOnTop: true,
+        // alwaysOnTop: true,
         webPreferences: {
-            nodeIntegration: true, // 是否集成 Nodejs
-            enableRemoteModule: true, // 是否启用remote模块
-            contextIsolation: false, // 是否启用渲染进程沙盒
+            devTools:true, //是否开启调试
+            nodeIntegration: true,  //开启主进程和渲染进程之间的通信
+            enableRemoteModule:true,
+            preload:path.join(__dirname,'/preload.js'),
+            contextIsolation: false,
+            nodeIntegrationInSubFrames: true
         }
     })
+    remote.enable(mainWindow.webContents)
+    console.log(store)
+    store.set('foo.bar', true);
+    console.log(store.get('foo.bar'))
     // mainWindow.setIgnoreMouseEvents(true)
     if (mode === 'dev') {
         // 加载应用----适用于 react 项目
