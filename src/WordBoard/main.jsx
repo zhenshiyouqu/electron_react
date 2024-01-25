@@ -3,33 +3,18 @@ import Word from "./Word";
 import output from "../source/output.json";
 import save from "../source/save.json";
 import {Button} from "antd";
+import {useNavigate} from "react-router-dom";
 
 const remote = window.remote;
 const electron = window.electron;
 const Store = window.Store;
 const store =new Store({"name":"test"});
 const Main = props => {
-    const todayWords=[];
-    const timeId = useRef(0);
-    const [word, setWord] = useState(output[0]);
-    //获取单词
-    const getWord = () => {
-        timeId.current = timeId.current + 1;
-        todayWords.push(output[timeId.current]);
-        setWord(output[timeId.current]);
-    }
-    //设置定时触发器
-    useEffect(() => {
-        const id = setInterval(getWord, 10000);
-        return () => {
-            clearInterval(id);
-        };
-    }, []);
+    const navigate = useNavigate();
     return (
         <>
-            {/*<Word word={word}/>*/}
             <div>
-                <h3>已学习</h3>
+                <h3>总共已学习</h3>
                 <span>{save.learnedNum}</span>
             </div>
             <div>
@@ -42,7 +27,14 @@ const Main = props => {
             </div>
             <div>
                 {
-                    save.learnedNum === 0 ?<Button type="primary">开始学习</Button> : <Button type="primary">继续学习</Button>
+                    save.learnedNum === 0 ?
+                        <Button type="primary" onClick={()=>{
+                            navigate("/wordboard")
+                        }}>开始学习</Button>
+                        :
+                        <Button type="primary" onClick={()=>{
+                            navigate("/wordboard")
+                        }}>继续学习</Button>
                 }
                 <Button type="primary" onClick={()=>{
                     console.log(remote);
