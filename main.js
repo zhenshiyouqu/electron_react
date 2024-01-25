@@ -4,7 +4,6 @@ const path = require('node:path')
 const url = require('url')
 //持久化
 const Store = require('electron-store');
-const store = new Store();
 
 //开启远程模块
 const remote = require("@electron/remote/main")
@@ -38,9 +37,6 @@ function createWindow() {
         }
     })
     remote.enable(mainWindow.webContents)
-    console.log(store)
-    store.set('foo.bar', true);
-    console.log(store.get('foo.bar'))
     // mainWindow.setIgnoreMouseEvents(true)
     if (mode === 'dev') {
         // 加载应用----适用于 react 项目

@@ -8,7 +8,9 @@ import {useNavigate} from "react-router-dom";
 const remote = window.remote;
 const electron = window.electron;
 const Store = window.Store;
-const store =new Store({"name":"test"});
+const config =new Store({"name":"config"});
+const usersave =new Store({"name":"usersave"});
+
 const Main = props => {
     const navigate = useNavigate();
     return (
@@ -37,9 +39,14 @@ const Main = props => {
                         }}>继续学习</Button>
                 }
                 <Button type="primary" onClick={()=>{
-                    console.log(remote);
-                    console.log(electron);
-                    store.set("test","test");
+                    console.log(usersave.get("dict"));
+                    if(usersave.get("dict") === undefined) {
+                        usersave.set(save)
+                    }
+                    if(config.get("dict") === undefined) {
+                        config.set(config)
+                    }
+
                 }}>Test</Button>
             </div>
         </>
