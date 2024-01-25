@@ -2,17 +2,20 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
+const Store = require('electron-store');
 
-
+const store = new Store();
 // 获取在 package.json 中的命令脚本传入的参数，来判断是开发还是生产环境
 const mode = process.argv[2];
-
 
 // 保持window对象的全局引用,避免JavaScript对象被垃圾回收时,窗口被自动关闭.
 let mainWindow
 
-
 function createWindow() {
+    //初始化用户数据
+    store.set('user', {
+        name: '张三',
+        age: 25});
     //创建浏览器窗口,宽高自定义
     mainWindow = new BrowserWindow({
         width: 800,
