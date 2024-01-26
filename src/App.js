@@ -1,4 +1,4 @@
-import Main from "./WordBoard/main";
+import Main from "./MainBoard/main";
 
 function App() {
   return (

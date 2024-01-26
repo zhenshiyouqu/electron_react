@@ -4,7 +4,7 @@ const path = require('node:path')
 const url = require('url')
 //持久化
 const Store = require('electron-store');
-
+Store.initRenderer()
 //开启远程模块
 const remote = require("@electron/remote/main")
 remote.initialize()

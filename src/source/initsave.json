@@ -1,9 +1,10 @@
 {
-  "dict": "",
+  "dict": "CET4",
   "learnedNum": 0,
   "learnedTodayNum": 0,
   "todayWordsNum": 0,
   "lastLearnedNum": 0,
   "learnedTime": 0,
-  "learnedWords": []
+  "learnedWords": [],
+  "needReview": []
 }
