@@ -15,6 +15,7 @@ const usersave = new Store({"name": "usersave"});
 const dict = new Store({"name": "dict"});
 
 const DataContainer = styled.div`
+    flex: 1 1 100px;
     display: flex;
     justify-items: center;
     align-items: center;
@@ -22,20 +23,32 @@ const DataContainer = styled.div`
 `;
 
 const HandContainer = styled.div`
+    flex: 0 0 30px;
     display: flex;
-    justify-items: center;
-    align-items: center;
-    justify-content: center;
+    background-color: greenyellow;
+//    悬浮
+    &:hover{
+        background-color: #00FF00;
+        flex-basis: 80px;
+    }
 `;
 
 const MainBoardContainer = styled.div`
     display: flex;
     flex-direction: column;
-    
+    height: 100%;
 `;
 
 
-const TitleContainer = styled.h1`
+const TitleContainer = styled.div`
+    flex: 1 1 100px;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+`;
+
+const Title = styled.h1`
+    display: flex;
     justify-self: center;
     align-self: center;
 `;
@@ -66,7 +79,9 @@ const MainBoard = props => {
     return (
         <MainBoardContainer>
             <TitleContainer>
-                {userconfig.get("username")}，欢迎回来！
+                <Title>
+                    {userconfig.get("username")}，欢迎回来！
+                </Title>
             </TitleContainer>
             <DataContainer>
                 <div>
@@ -87,25 +102,46 @@ const MainBoard = props => {
                 </div>
             </DataContainer>
             <HandContainer>
-                <Button type="primary" onClick={() => {
-                }}>切换词典</Button>
-                {
-                    save.learnedNum === 0 ?
-                        <Button type="primary" onClick={() => {
-                            navigate("/wordboard")
-                        }}>开始学习</Button>
-                        :
-                        <Button type="primary" onClick={() => {
-                            navigate("/wordboard")
-                        }}>继续学习</Button>
-                }
-                <Button type="primary" onClick={() => {
-                    console.log("dictRef.current", dictRef.current)
-                }}>设置\测试</Button>
+                <HandItem>
+                    <h4>切换词典</h4>
+                </HandItem>
+                {/*<Button type="primary" onClick={() => {*/}
+                {/*}}>切换词典</Button>*/}
+                {/*{*/}
+                {/*    save.learnedNum === 0 ?*/}
+                {/*        <Button type="primary" onClick={() => {*/}
+                {/*            navigate("/wordboard")*/}
+                {/*        }}>开始学习</Button>*/}
+                {/*        :*/}
+                {/*        <Button type="primary" onClick={() => {*/}
+                {/*            navigate("/wordboard")*/}
+                {/*        }}>继续学习</Button>*/}
+                {/*}*/}
+                {/*<Button type="primary" onClick={() => {*/}
+                {/*    console.log("dictRef.current", dictRef.current)*/}
+                {/*}}>设置\测试</Button>*/}
             </HandContainer>
         </MainBoardContainer>
     );
 };
+
+const HandItem = styled.div`
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    background-color: inherit;
+    //默认隐藏
+    visibility: hidden;
+    
+    //当HandContainer悬浮时显示
+    ${HandContainer}:hover &{
+        visibility: visible;
+    }
+    &:hover{
+        background-color: yellow;
+    }
+`;
 
 MainBoard.propTypes = {};
 
